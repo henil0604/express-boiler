@@ -8,5 +8,5 @@ module.exports = [
                 res.send("Hello World")
             }
         ]
-    },
-];
+    }
+]
