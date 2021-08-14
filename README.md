@@ -141,6 +141,7 @@ RouterManager(
 - Usage: Allows you to Setup `hitpoints`, `staticserve`, `middlewares`, `nested-routers` by just Providing `JSON` Object
 - Parameters:
     `app`: Provide `app` or `router` object
+
     `data`: Provide `JSON` Object Containing `hitpoint` Data
 
 
