@@ -196,10 +196,10 @@ RouterManager(
         type: "middleware",
         middlewares: [
             (req, res)=>{
-                if(!isAdmin(req.user)){
-                    res.send("Not Allowed")
+                if(isAdmin(req.user)){
+                    next();
                 }
-                next();
+                res.send("Not Allowed");
             }
         ]
     }
