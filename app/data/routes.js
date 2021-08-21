@@ -4,7 +4,7 @@ module.exports = [
         method: "GET",
         type: "hitpoint",
         middlewares: [
-            (req, res) => {
+            async (req, res) => {
                 res.send("Hello World")
             }
         ]

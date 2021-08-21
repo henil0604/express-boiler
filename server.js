@@ -13,7 +13,6 @@ app = RouterManager(
 )
 
 
-
 app.listen(PORT, () => {
     log(`Listening on PORT ${log.chalk.greenBright(PORT)}`, 'success');
     log(`Load time: ${Date.now() - app.__STARTING_TIME}ms`);
