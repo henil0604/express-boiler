@@ -9,7 +9,8 @@ A simple Boiler Plate code for Creating Express Based Server
 │   │   └───routes.js
 │   ├───helpers/
 │   │   ├───env.js
-│   │   └───log.js
+│   │   ├───log.js
+│   │   └───mongo.js
 │   ├───middlewares/
 │   │   ├───hit.js
 │   │   ├───rate-limiter.js
@@ -89,11 +90,25 @@ log("Hello, World!");
         - default: `env("FILE_LOG_PATH")`
 
 ```js
-    log("Something Wrong Happened", "error", "[SERVER]")
+log("Something Wrong Happened", "error", "[SERVER]")
 ```
 ![image](https://user-images.githubusercontent.com/62794871/129443085-2402831d-3ce0-4af9-bb03-2c2f28048a8b.png)
 
+##### mongo.js
+```js
+const mongo = require("app/helpers/mongo");
 
+const getUser = async (userId)=>{
+    const collection = (await mongo()).useDb("helloworld").collection("users");
+
+    return collection.findOne({userId});
+}
+```
+
+- Usage: Mongo Helper Function directly gives your access over `MongoClient` Object
+- Parameters:
+    - `connectionURI`:
+        - default: `env("MONGO_CONNECTION_URI")`
 ------
 
 #### Middlewares
