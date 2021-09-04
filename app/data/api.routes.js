@@ -5,13 +5,8 @@ module.exports = [
         type: "hitpoint",
         middlewares: [
             async (req, res) => {
-                res.send("Hello World")
+                res.send("Hello From /api")
             }
         ]
-    },
-    {
-        path: "/api",
-        type: "router",
-        routes: require("./api.routes.js")
     }
 ]

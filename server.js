@@ -6,6 +6,7 @@ const RouterManager = require("./app/middlewares/RouterManager")
 const PORT = env("PORT") || 4141;
 
 app.use(require("./app/middlewares/hit"));
+app.use(require("./app/middlewares/RequestParser"));
 
 app = RouterManager(
     app,

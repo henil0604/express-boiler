@@ -6,12 +6,11 @@ let data = {
 };
 
 
-const mongo = async (connectionURI = data.defaultConnectionURI, dbName = data.defaultDbName) => {
+const mongo = async (connectionURI = data.defaultConnectionURI) => {
     const conn = (await mongoose.connect(data.defaultConnectionURI || connectionURI, {
         useUnifiedTopology: true,
         useNewUrlParser: true
     })).connection
-
 
     return conn;
 }
