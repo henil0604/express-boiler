@@ -6,6 +6,7 @@ A simple Boiler Plate code for Creating Express Based Server
 ```bash
 ├───app/
 │   ├───data/
+│   │   ├───api.routes.js
 │   │   └───routes.js
 │   ├───helpers/
 │   │   ├───env.js
