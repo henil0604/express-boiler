@@ -10,11 +10,14 @@ A simple Boiler Plate code for Creating Express Based Server
 │   ├───helpers/
 │   │   ├───env.js
 │   │   ├───log.js
-│   │   └───mongo.js
+│   │   ├───mongo.js
+│   │   ├───createResponse.js
+│   │   └───resolveRequest.js
 │   ├───middlewares/
 │   │   ├───hit.js
 │   │   ├───rate-limiter.js
-│   │   └───RouterManager.js
+│   │   ├───RouterManager.js
+│   │   └───RequestParser.js
 │   └───index.js
 ├───.gitignore
 ├───package-lock.json
@@ -109,6 +112,56 @@ const getUser = async (userId)=>{
 - Parameters:
     - `connectionURI`:
         - default: `env("MONGO_CONNECTION_URI")`
+
+##### createResponse.js
+
+```js
+res.json(createResponse({
+    name: "Henil",
+    score: 100
+}))
+```
+It will send the data like this:
+```js
+{
+    name: "Henil",
+    score: 100,
+    _: {
+        responseTime: ..., // Date.now()
+        responseToken: ... // a random token
+    }
+}
+```
+- Make sure that this data will get stored in `log` folder if `FILE_LOG_PATH` is provided
+- This Helper Function will be avilable at `req.createResponse` if `RequestParser Middleware` is used
+
+###### resolveRequest.js
+
+```js
+// Manual Usage
+const resolve = resolveRequest(req, res);
+```
+
+```js
+resolveRequest({
+    package: "express-boiler",
+    lastUpdated: "1 day ago"
+}, 200)
+```
+- `resolveRequest` resolves the request with given Data
+- Parameters:
+  - `data`: Data that will be sent
+  - `statusCode`: 
+    - default: `statusCode || data.statusCode || 200`
+    - type: Number (`http Status code`)
+  - `json`:
+    - Usage: Tells the resolver that the data should be sent as `application/json`
+    - default: `true`
+    - type: `boolean`
+    - If `false` it will use `req.send`
+    - If `true` it will use `req.json`
+- This Helper Function will be avilable at `req.resolve` if `RequestParser Middleware` is used
+
 ------
 
 #### Middlewares
@@ -125,8 +178,7 @@ app.use(require("app/middlewares/hit"));
 ```
 ![image](https://user-images.githubusercontent.com/62794871/129443314-12bc8ff2-623c-47b6-965f-239734e9b7f9.png)
 
-- Usage: use `log` (Helper Function) to log Every Incoming Request
-
+- Usage: use `log` (Helper Function) to log to console
 
 ##### rate-limmiter.js
 ```js
@@ -221,6 +273,19 @@ RouterManager(
         ]
     }
     ```
+
+##### RequestParser.js
+
+```js
+// Internal Working Code
+
+req.db = await mongo();
+req.createResponse = createResponse;
+req.resolve = resolveRequest(req, res)
+```
+
+- It Provides some of the most used and common functions and data to every request
+
 
 
 ## Enjoy!
