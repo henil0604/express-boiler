@@ -8,7 +8,11 @@ let defaultPrefix = ">";
 
 let fileLog = (data) => {
 
-    let dir = path.join(appRoot.toString(), data.FILE_LOG_PATH || env("FILE_LOG_PATH"));
+    const logPath = data.FILE_LOG_PATH || env("FILE_LOG_PATH")
+
+    if (!logPath) return false;
+
+    let dir = path.join(appRoot.toString(), logPath);
 
     data.FILE_LOG_PATH ? delete data.FILE_LOG_PATH : null;
     data.stime = Date.now();
