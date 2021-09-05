@@ -280,7 +280,6 @@ RouterManager(
 ```js
 // Internal Working Code
 
-req.db = await mongo();
 req.createResponse = createResponse;
 req.resolve = resolveRequest(req, res)
 ```
