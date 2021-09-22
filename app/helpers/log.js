@@ -15,7 +15,7 @@ let fileLog = (data) => {
     let dir = path.join(appRoot.toString(), logPath);
 
     data.FILE_LOG_PATH ? delete data.FILE_LOG_PATH : null;
-    data.stime = Date.now();
+    data.logTime = Date.now();
 
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
@@ -39,34 +39,63 @@ let fileLog = (data) => {
 
 }
 
-let log = (text = "", status = "info", prefix = defaultPrefix, fileLogging = env("FILE_LOG_PATH")) => {
-    let t = `${prefix} `;
+let log = (data = "", status = "info", prefix = defaultPrefix, fileLogging = env("FILE_LOG_PATH")) => {
+    const canBeLogged = env("LOG") == undefined || env("LOG") == null ? true : env("LOG")
 
-    if (status == "log") {
-        t = chalk.whiteBright(t)
+    if (!canBeLogged) {
         return;
     }
-    if (status == "success") {
-        t = chalk.greenBright(t);
-    }
-    if (status == "info") {
-        t = chalk.cyanBright(t);
-    }
-    if (status == "warn") {
-        t = chalk.yellowBright(t);
-    }
-    if (status == "error") {
-        t = chalk.redBright(t);
+    data.__proto__.canBeFormatted = true;
+
+    if (typeof data == "object") {
+        try {
+            data = JSON.stringify(data);
+            data.__proto__.canBeFormatted = false;
+        } catch { }
     }
 
-    t += text;
+    let t = `${prefix} `;
+    let color = chalk.whiteBright;
+
+    if (status == "log") {
+        color = chalk.whiteBright
+    }
+    if (status == "success") {
+        color = chalk.greenBright;
+    }
+    if (status == "info") {
+        color = chalk.cyanBright;
+    }
+    if (status == "warn") {
+        color = chalk.yellowBright;
+    }
+    if (status == "error") {
+        color = chalk.redBright;
+    }
+
+    t = color(t)
+
+    t += data;
+
+    if (
+        data.__proto__.canBeFormatted &&
+        /\{(.*)\}/g.test(data)
+    ) {
+        const reg = /\{(.*)\}/g;
+        const insideData = data.match(reg)
+        insideData.forEach(e => {
+            const formattedString = e.replace(/\{|\}/g, ``)
+            const coloredString = color(formattedString);
+            t = t.replace(e, coloredString);
+        })
+    }
 
     console.log(t);
 
     if (fileLogging) {
         try {
             fileLog({
-                text,
+                data,
                 status,
                 FILE_LOG_PATH: fileLogging
             })
@@ -77,5 +106,6 @@ let log = (text = "", status = "info", prefix = defaultPrefix, fileLogging = env
 log.__proto__.setDefaultPrefix = (prefix = "") => { defaultPrefix = prefix };
 log.__proto__.chalk = chalk;
 log.__proto__.fileLog = fileLog;
+
 
 module.exports = log;
