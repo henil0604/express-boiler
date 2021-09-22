@@ -286,7 +286,24 @@ req.resolve = resolveRequest(req, res)
 
 - It Provides some of the most used and common functions and data to every request
 
+--------------------------------------------------
 
+### Globals
+
+`Globals` Helps you quickly access common methods and Functions in your application.
+
+It Works within the help of `globalThis` in NodeJs.
+
+##### Built-In Globals
+
+- `env`: `/app/helpers/env`
+- `app`: `app` Object from `express`
+- `log`: `/app/helpers/log`
+
+
+
+<br>
+<br>
 
 ## Enjoy!
 
