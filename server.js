@@ -12,6 +12,10 @@ app.use(require("./app/middlewares/RequestParser"));
 globalThis.env = env;
 globalThis.app = app;
 globalThis.log = log;
+globalThis.imp = (d) => {
+    const p = `${path.join(__dirname, d)}`
+    return require(p);
+}
 
 app = RouterManager(
     app,
