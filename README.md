@@ -13,12 +13,17 @@ A simple Boiler Plate code for Creating Express Based Server
 │   │   ├───log.js
 │   │   ├───mongo.js
 │   │   ├───createResponse.js
+│   │   ├───responseHandler.js
 │   │   └───resolveRequest.js
 │   ├───middlewares/
 │   │   ├───hit.js
 │   │   ├───rate-limiter.js
 │   │   ├───RouterManager.js
 │   │   └───RequestParser.js
+│   ├───Models
+│   │   └───(empty)
+│   ├───validation
+│   │   └───(empty)
 │   └───index.js
 ├───.gitignore
 ├───package-lock.json
@@ -163,6 +168,25 @@ resolveRequest({
     - If `true` it will use `req.json`
 - This Helper Function will be avilable at `req.resolve` if `RequestParser Middleware` is used
 
+
+###### responseHandler.js
+
+```js
+    req.HANDLE_RESPONSE = true;
+    req.HANDLE_DATA ={
+        data: {
+            status: "success",
+        },
+        statusCode: 201
+    }
+```
+
+- if you set `req.HANDLE_RESPONSE` to `true`, `responseHandler` will use `req.HANDLE_DATA` and pass it to `req.resolve`.
+
+- if you dont set `req.HANDLE_RESPONSE` to `true` it will ignore the data and call the next middleware.
+
+- if the response was ever handled by `responseHandler` the next middleware would have `req.HANDLED` set to `true`, if don't it would have set to `false`.
+
 ------
 
 #### Middlewares
@@ -299,6 +323,20 @@ It Works within the help of `globalThis` in NodeJs.
 - `env`: `/app/helpers/env`
 - `app`: `app` Object from `express`
 - `log`: `/app/helpers/log`
+- `imp`: allows to import modules using absolute path
+
+---------------------------------------------
+
+
+### Models
+
+- Allows to store `MongoDb Models`
+
+----------------------------------------------
+
+### validation
+
+- Allows to store Validation Schema for [Joi Validation](https://joi.dev)
 
 
 
