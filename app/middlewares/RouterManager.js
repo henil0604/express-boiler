@@ -29,7 +29,11 @@ const Appify = (app, data) => {
         }
 
         if (d.type == "middleware") {
-            app.use(d.path, ...d.middlewares)
+            if (!d.path) {
+                app.use(...d.middlewares)
+            } else {
+                app.use(d.path, ...d.middlewares)
+            }
         }
 
         if (d.type == "router") {
@@ -54,7 +58,7 @@ const HitPointInterface = (data) => {
         data.type = "hitpoint";
     }
 
-    if (!data.path) {
+    if (!data.path && data.type == "hitpoint") {
         throw new Error("Path Not Provided");
     }
 
