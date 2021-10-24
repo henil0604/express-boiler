@@ -7,22 +7,30 @@ A simple Boiler Plate code for Creating Express Based Server
 ├───app/
 │   ├───data/
 │   │   ├───api.routes.js
+│   │   ├───events.io.socket.js
+│   │   ├───events.socket.socket.js
+│   │   ├───responseCodes.js
 │   │   └───routes.js
 │   ├───helpers/
+│   │   ├───createResponse.js
 │   │   ├───env.js
+│   │   ├───InitializeMongoDb.js
 │   │   ├───log.js
 │   │   ├───mongo.js
-│   │   ├───createResponse.js
+│   │   ├───resolveRequest.js
 │   │   ├───responseHandler.js
-│   │   └───resolveRequest.js
+│   │   └───SocketIo.js
 │   ├───middlewares/
 │   │   ├───hit.js
 │   │   ├───rate-limiter.js
-│   │   ├───RouterManager.js
-│   │   └───RequestParser.js
-│   ├───Models
+│   │   ├───RequestParser.js
+│   │   └───RouterManager.js
+│   ├───models/
 │   │   └───(empty)
-│   ├───validation
+│   ├───routes/
+│   │   └───api/
+│   │       └───(empty)
+│   ├───validation/
 │   │   └───(empty)
 │   └───index.js
 ├───.gitignore
@@ -189,6 +197,52 @@ resolveRequest({
 
 ------
 
+###### createResponse.js
+Allows to add additional information to your response
+```js
+const createResponse = imp("app/helpers/createResponse");
+// or `req.createResponse`
+
+createResponse({
+    Hello: "World"
+})
+/*
+    {
+        Hello: "World",
+        _: {
+            responseTime // Date.now()
+            responseToken // Random Token
+        }
+    }
+*/
+```
+
+-------
+
+###### InitializeMongoDb.js
+
+Initialize MongoDb Connection and Listen for Specific Events
+```js
+...
+const InitializeMongoDb = imp("app/helpers/InitializeMongoDb");
+
+InitializeMongoDb();
+...
+```
+
+-------
+
+###### SocketIo.js
+Contains Important Function of SocketIo Initialization
+```js
+const SocketIo = imp("app/helpers/SocketIo");
+
+const { socket, io } = SocketIo(app)
+
+...
+```
+
+
 #### Middlewares
 
 Middleware Helper Function
@@ -306,6 +360,8 @@ RouterManager(
 
 req.createResponse = createResponse;
 req.resolve = resolveRequest(req, res)
+req.code = responseCodes;
+
 ```
 
 - It Provides some of the most used and common functions and data to every request
@@ -324,20 +380,27 @@ It Works within the help of `globalThis` in NodeJs.
 - `app`: `app` Object from `express`
 - `log`: `/app/helpers/log`
 - `imp`: allows to import modules using absolute path
+- `helperJs`: Access to `require("@henil0604/helperjs")`
+
 
 ---------------------------------------------
 
 
-### Models
+### `models`
 
 - Allows to store `MongoDb Models`
 
 ----------------------------------------------
 
-### validation
+### `validation`
 
 - Allows to store Validation Schema for [Joi Validation](https://joi.dev)
 
+---------------------------------------------
+
+### `routes`
+
+- Directory where you can store Request Handlers
 
 
 <br>
