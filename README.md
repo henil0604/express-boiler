@@ -197,28 +197,6 @@ resolveRequest({
 
 ------
 
-###### createResponse.js
-Allows to add additional information to your response
-```js
-const createResponse = imp("app/helpers/createResponse");
-// or `req.createResponse`
-
-createResponse({
-    Hello: "World"
-})
-/*
-    {
-        Hello: "World",
-        _: {
-            responseTime // Date.now()
-            responseToken // Random Token
-        }
-    }
-*/
-```
-
--------
-
 ###### InitializeMongoDb.js
 
 Initialize MongoDb Connection and Listen for Specific Events
