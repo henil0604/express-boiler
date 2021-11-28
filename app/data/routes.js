@@ -13,5 +13,11 @@ module.exports = [
         path: "/api",
         type: "router",
         routes: require("./api.routes.js")
+    },
+    {
+        type: "middleware",
+        middlewares: [
+            imp("app/helpers/responseHandler")
+        ]
     }
 ]
