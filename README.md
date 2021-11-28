@@ -14,6 +14,7 @@ A simple Boiler Plate code for Creating Express Based Server
 │   ├───helpers/
 │   │   ├───createResponse.js
 │   │   ├───env.js
+│   │   ├───ErrorHandler.js
 │   │   ├───InitializeMongoDb.js
 │   │   ├───log.js
 │   │   ├───mongo.js
@@ -219,6 +220,21 @@ const { socket, io } = SocketIo(app)
 
 ...
 ```
+
+###### ErrorHandler.js
+Allows to Handle Error while handling the request
+```js
+...
+const ErrorHandler = imp("app/helpers/ErrorHandler");
+
+ErrorHandler((req, res, next)=>{
+    // Purposefully created Error
+    He?l<:>l!oW|or'l'd
+});
+
+```
+
+This returns a Response Code of "500" with enough details.
 
 
 #### Middlewares
