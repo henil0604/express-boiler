@@ -17,9 +17,9 @@ app.use(useragent.express())
 app.use(requestIp.mw())
 
 // Setting Globals
-globalThis.env = env;
 globalThis.app = app;
-globalThis.log = log;
+globalThis.env = require("@helper-modules/env");
+globalThis.log = require("@helper-modules/log");
 globalThis.helperJs = require("@henil0604/helperjs");
 globalThis.imp = (d) => {
     const p = `${path.join(__dirname, d)}`
