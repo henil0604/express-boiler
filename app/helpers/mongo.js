@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const env = require("./env");
 
 let data = {
     defaultConnectionURI: env("MONGO_CONNECTION_URI") || "mongodb://localhost:27017"

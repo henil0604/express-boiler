@@ -1,9 +1,8 @@
-const log = require("./log");
 const helperJs = require("@henil0604/helperjs");
 
 module.exports = (data) => {
     let response = {};
-    
+
     response._ = {};
 
     response._.responseTime = Date.now();

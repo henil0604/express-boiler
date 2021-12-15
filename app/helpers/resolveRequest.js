@@ -1,4 +1,3 @@
-const log = require("./log");
 
 module.exports = (req, res) => {
     return (data = {}, statusCode, json = true) => {

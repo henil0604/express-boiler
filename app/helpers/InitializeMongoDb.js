@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const mongo = require("./mongo");
-const log = require("./log");
 const prefix = "M"
 
 async function connect() {
