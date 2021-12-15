@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@helper-modules/env": "^1.0.3",
+    "@helper-modules/log": "^1.0.0",
     "@henil0604/helperjs": "^1.0.4",
     "app-root-path": "^3.0.0",
     "body-parser": "^1.19.0",
