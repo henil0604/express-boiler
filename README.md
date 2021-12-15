@@ -13,10 +13,8 @@ A simple Boiler Plate code for Creating Express Based Server
 │   │   └───routes.js
 │   ├───helpers/
 │   │   ├───createResponse.js
-│   │   ├───env.js
 │   │   ├───ErrorHandler.js
 │   │   ├───InitializeMongoDb.js
-│   │   ├───log.js
 │   │   ├───mongo.js
 │   │   ├───resolveRequest.js
 │   │   ├───responseHandler.js
@@ -39,6 +37,8 @@ A simple Boiler Plate code for Creating Express Based Server
 ├───package.json
 ├───README.md
 └───server.js
+└───TODO.md
+
 ```
 
 ------
@@ -67,50 +67,10 @@ npm run dev
 #### Helpers
 
 ##### env.js
-```js
-const env = require("app/helpers/env")
-
-const PORT = env("PORT");
-
-...
-
-```
-
-- Usage: To Grab Environment Variables from `.env` files
-- Parameters: 
-    - `key`: the key value you want to grab from the environment variables
-    - `filter`:
-        - default: `true`
-        - Usage: Filters the String like `false`, `true` to their original type
-
+`REPLACED WITH` [@helper-modules/env](https://www.npmjs.com/@helper-modules/env)
 ##### log.js
-```js
-const log = require("app/helpers/log");
 
-log("Hello, World!");
-...
-```
-
-![image](https://user-images.githubusercontent.com/62794871/129442872-adbd7f60-b9e0-4b06-8f01-32779da4a3d9.png)
-![image](https://user-images.githubusercontent.com/62794871/129442941-2d3b03c5-1453-4434-9e72-50d36263e3c6.png)
-
-
-- Usage: Log to the Console in different Colors
-- Parameters:
-    - `text`: a text you want to log
-    - `status`:
-        - default: `info`
-        - possible: `info`, `log`, `success`, `warn`, `error`
-    - `prefix`: 
-        - default: `>`
-    - `fileLogging`:
-        - Usage: Tell the log function if the data could be logged to `.json` file
-        - default: `env("FILE_LOG_PATH")`
-
-```js
-log("Something Wrong Happened", "error", "[SERVER]")
-```
-![image](https://user-images.githubusercontent.com/62794871/129443085-2402831d-3ce0-4af9-bb03-2c2f28048a8b.png)
+`REPLACED WITH` [@helper-modules/log](https://www.npmjs.com/@helper-modules/log)
 
 ##### mongo.js
 ```js
