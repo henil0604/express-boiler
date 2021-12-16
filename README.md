@@ -11,6 +11,7 @@ A simple Boiler Plate code for Creating Express Based Server
 │   │   ├───events.socket.socket.js
 │   │   ├───responseCodes.js
 │   │   └───routes.js
+│   │   └───rest-service-integration-model.js
 │   ├───helpers/
 │   │   ├───createResponse.js
 │   │   ├───ErrorHandler.js
@@ -253,7 +254,7 @@ RouterManager(
     ```js
     {
         path: "/",
-        method: "GET",
+        method: ["GET", "POST"],
         type: "hitpoint",
         middlewares: [
             (req, res) => {
@@ -330,9 +331,9 @@ It Works within the help of `globalThis` in NodeJs.
 
 ##### Built-In Globals
 
-- `env`: `/app/helpers/env`
+- `env`: `@helper-modules/env`
 - `app`: `app` Object from `express`
-- `log`: `/app/helpers/log`
+- `log`: `@helper-modules/log`
 - `imp`: allows to import modules using absolute path
 - `helperJs`: Access to `require("@henil0604/helperjs")`
 
