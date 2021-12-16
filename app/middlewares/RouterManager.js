@@ -15,10 +15,23 @@ const Appify = (app, data) => {
         d = HitPointInterface(d);
 
         if (d.type == "hitpoint") {
-            app[d.method.toLowerCase()](
-                d.path,
-                ...d.middlewares
-            )
+
+            if (Array.isArray(d.method)) {
+                for (let method of d.method) {
+                    method = method.toLowerCase();
+                    app[method](
+                        d.path,
+                        ...d.middlewares
+                    )
+                }
+
+            } else {
+                const method = d.method.toLowerCase();
+                app[method](
+                    d.path,
+                    ...d.middlewares
+                )
+            }
         }
 
         if (d.type == "static") {
@@ -81,6 +94,7 @@ const HitPointInterface = (data) => {
     if (!data.middlewares && data.type == "middleware") {
         data.middlewares = [];
     }
+
 
     return data;
 }
